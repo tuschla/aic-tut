@@ -1,0 +1,976 @@
+\documentclass{article}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\title{AI C Tuts}
+\author{Leon Tuschla}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Tutorial 1}
+\subsection{Why is the development of an online store with large information systems so challenging?}
+\begin{itemize}
+    \item Information Systems usually incorporate multiple classes and various languages. They are often composed of different applications with each fulfilling its very own functionality. \textbf{Interoperability} must be guaranteed.
+    \item Different stakeholders have different perspectives and requirements towards a solution ("Which functions should the system possess?"). \textbf{Usability} has to be considered.
+    \item Often, legacy systems and components have to be \textbf{integrated}. These use several operating systems, offer different APIs (if any), etc.
+    \item Moreover, these challenges apply:
+          \begin{itemize}
+              \item Reliability
+              \item Scalability
+              \item Information Security / Privacy
+          \end{itemize}
+\end{itemize}
+
+\subsection{What are common layers in an information system?}
+\begin{itemize}
+    \item The \textbf{client} is the user or the application which accesses the (services of the) information system
+    \item Hereby, the client interacts with the system via the \textbf{presentation layer}
+    \item The \textbf{application logic layer} incorporates algorithms, rules and business processes which determine the system's character and behavior
+    \item The \textbf{data management} layer stores information persistently, accessible by the application layer
+\end{itemize}
+
+\subsection{Discuss the advantages and disadvantages of the layer model}
+\begin{itemize}
+    \item Advantages
+          \begin{itemize}
+              \item Possibility to reuse functions in a layer
+              \item Distribution of layers over several physical levels and machines \(\rightarrow\) a clever composition of the system allows for a better performance, Scalability and fault tolerance
+              \item Easier to maintain the system by means of loose coupling
+              \item Adding new functions and expanding of the functionality is simpler
+              \item Layers can be tested and debugged on their own
+          \end{itemize}
+    \item Disadvantages
+          \begin{itemize}
+              \item Less performance as communication has to traverse multiple layers:
+                    \begin{itemize}
+                        \item No direct interaction with the data management layer from more distant layers
+                    \end{itemize}
+              \item Large-scale applications profit from a disaggregation into multiple layers. However, smaller applications become more complex, unavoidably
+              \item Changes in one layer may have unanticipated consequences in other layers \(\rightarrow\) standard interfaces have to be defined in advance and also serviced
+          \end{itemize}
+\end{itemize}
+
+\subsection{What is commonly understood by layers as opposed to tiers?}
+\begin{itemize}
+    \item Layers: \textbf{logical} separation of concerns
+    \item Tiers: \textbf{physical} separation of concerns
+    \item Multiple layers may be realized on one server (and, therefore, one tier)
+\end{itemize}
+
+\subsection{Name some criteria that support a multi-tier information systems architecture}
+Contemporary and modern distributed systems make use of multi-tier architectures. Single tiers can be virtualized.
+Clients can connect with these tiers, e.g. via the Internet. Usually, the set of clients is heterogenous (i.e., ,they have different OSes, web browsers etc.)
+Advantages:
+\begin{itemize}
+    \item Scalability in the horizontality:
+          \begin{itemize}
+              \item Number of clients which can connect to the system can (easily) be upscaled
+          \end{itemize}
+    \item Increased fault tolerance
+    \item Lower latency
+    \item Performant integration of existing system and legacy components may be easier to achieve
+\end{itemize}
+
+\subsection{How can cloud architectures be placed in this context?}
+\begin{itemize}
+    \item Single tiers can be virtualized: cloud offers possibility to host these tiers
+    \item Multiple cloud models exist which differ in the integration of tiers and functionality:
+          \begin{itemize}
+              \item Infrastructure as a Service (IaaS): solely computing power and storage
+              \item Platform as a Service (PaaS): a running OS on a virtualized machines
+              \item Software as a Service (SaaS): application, often executed in cloud
+          \end{itemize}
+\end{itemize}
+
+\subsection{What are differences and trade-offs between fat and thin clients?}
+\begin{itemize}
+    \item \textbf{Thin clients}
+          \begin{itemize}
+              \item Only possess the ability to represent the (user) interfaces
+              \item Formerly: dumb Terminals
+              \item Today: web clients, making use of:
+                    \begin{itemize}
+                        \item Dynamic websites which "react" to the constraints of a client and incorporate different markup-languages
+                        \item Web browser, which renders the webpages received by the server
+                    \end{itemize}
+          \end{itemize}
+    \item \textbf{Fat clients} (application clients)
+          \begin{itemize}
+              \item Presentation layer on client side
+              \item May take care of a part of the application's logic
+          \end{itemize}
+\end{itemize}
+
+\subsection{How can a company with SOA mitigate its organization towards independent organizational units?}
+SOA
+\begin{itemize}
+    \item Designing and developing software in the form of interoperable services
+    \item Services are well-defined business functions, built as software components
+    \item In a SOA, the architecture is divided in to several services
+          \begin{itemize}
+              \item Each Service stands for a certain business process
+          \end{itemize}
+    \item Therefore, separate entities in an organization can work on and with at least one service
+          \begin{itemize}
+              \item Communication with other services works by means of the APIs the services are offering
+              \item The entities have to agree on these interfaces
+              \item All services need to offer well-defined APIs
+          \end{itemize}
+    \item Thus, an organization can represent the business processes of its units independently while these have to offer interfaces to the remaining units
+    \item Jeff Bezoz 2002 API mandate:
+          \begin{itemize}
+              \item All teams will henceforth expose their data and functionality through service interfaces.
+              \item Teams must communicate with each other through these interfaces.
+              \item There will be no other form of interprocess communication allowed: no direct linking, no direct reads of another team's data store, no shared-memory model, no back-doors whatsoever. The only communication allowed is via service interface calls over the network.
+              \item It doesn't matter what technology they use. HTTP, Corba, Pubsub, custom protocols -- doesn't matter.
+              \item All service interfaces, without exception, must be designed from the ground up to be externalizable. That is to say, the team must plan and design to be able to expose the interface to developers in the outside world. No exceptions.
+              \item Anyone who doesn't do this will be fired.
+          \end{itemize}
+\end{itemize}
+
+\subsection{What layers do you propose for an e-commerce platform?}
+\begin{itemize}
+    \item Four layers:
+          \begin{itemize}
+              \item First layer: Client layer, with which the user can interact with the application
+              \item Second layer: Presentation layer ("web server") which dynamically creates the interface to be rendered by the client. This layer has to access the\dots
+              \item Third layer: Application logic layer, where most of the functionality of the platform is defined and implemented
+              \item Fourth layer: Data management layer, which hosts and handles the data and may integrate specific software to be implemented, e.g., an inventory control system
+          \end{itemize}
+\end{itemize}
+
+\section{Tutorial 2}
+\subsection{Functional and non-functional requirements for an IS for online lectures and meetings.}
+\begin{itemize}
+    \item Definition: Functional requirements define the desired features and functions of a system or one of its components. A functional requirement includes the definition of a functionality and its transformation from an input into a desired output.
+    \item Strong focus on functionality to serve a particular purposes
+          \begin{itemize}
+              \item Example: user login or item search
+          \end{itemize}
+    \item Do not dictate a specific IS architecture design
+          \begin{itemize}
+              \item Example: "Strong data in a database" can be met with different types of databases
+          \end{itemize}
+    \item Nonfunctional requirements are requirements that are not specifically concerned with the system's functionality, but rather define general quality attributes and constraints.
+    \item Describes no functionality, but instead the system's properties and behaviours
+          \begin{itemize}
+              \item Example: "handling a highly fluctuating workload" translates into either a highly scalable infrastructure or easily migratable to another infrastructure
+          \end{itemize}
+\end{itemize}
+
+\subsection{Requirements engineering}
+You're a requirements engineer who is part of a project team that's developing an information system for online lectures and meetings. Define five to ten functional and non-functional requirements each. Please use the provided template for your requirements and focus on a clear and precise use of language.
+
+Template:
+[<Condition>] <Subject> <Action> <Objects> [<Restriction>]
+
+\subsection{Define functional and non-functional requirements}
+\begin{itemize}
+    \item Functional
+          \begin{itemize}
+              \item Create meetings
+              \item Join meetings
+              \item Record meetings
+              \item Ask for permission prior to recording
+          \end{itemize}
+    \item Non-functional
+          \begin{itemize}
+              \item Intuitive user interfaces
+              \item Meetings should have a latency of < 40 ms
+              \item High resolution video stream min 720p
+          \end{itemize}
+\end{itemize}
+
+\subsection{How can we improve the specification of requirements?}
+"Volume can be changed always, very fast, and at any time."
+\begin{itemize}
+    \item What is the condition? Use of a button
+    \item Who? The system
+    \item Use active instead of passive voice
+    \item Avoid redundancy: Always and every time
+    \item Specify reference points for adjectives: Faster than 500 ms after click
+    \item Use precise nouns: Change volume to audio volume
+\end{itemize}
+Better formulation: "Always when a volume button is clicked, the system shall adjust the audio volume within 500 ms after the click."
+
+\subsection{Tips for specifying good requirements}
+\begin{itemize}
+    \item State every requirement in a main clause
+    \item Build phrases with complete verbal structure
+    \item Use active instead of passive voice
+    \item Avoid redundancy
+    \item Specify reference points when using adjectives in comparative form: "faster" \(\rightarrow\) "faster than"
+    \item Check for all-quantifications "every", "always", "never"
+    \item Use of auxiliary verbs "must", "must not", "required", "shall", "shall not", "should", "should not", "recommended", "may", and "optional" as specified in Request for Comments (RFC 2119)
+\end{itemize}
+
+\subsection{Quality attributes can be evaluated in a quantitative or qualitative manner; quality characteristics, however, encompass one or multiple quality attributes and can't be evaluated themselves. Take a look at the non-functional requirements defined in the previous exercise and derive multiple quality attributes (if necessary, add new non-functional requirements). If appropriate, map the quality attributes to quality characteristics.}
+
+\subsection{Why do we need quality attributes and characteristics?}
+For a better understanding between all involved parties.
+
+\subsection{Quality attributes and characteristics}
+\begin{itemize}
+    \item Product quality model specifies 8 quality characteristics
+    \item To each characteristic several quality attributes can be mapped To
+    \item A quality attribute with a specific value is quality criterion
+          \begin{itemize}
+              \item Functional suitability
+              \item Compatibility
+              \item Maintainability
+              \item Performance efficiency
+              \item Reliability
+              \item Security
+              \item Portability
+              \item Usability
+          \end{itemize}
+\end{itemize}
+\begin{adjustbox}{width=1.7\textwidth,center=\textwidth}
+    \begin{tabular}{ |c|c|c|c|c|c|c|c| }
+        \hline
+        Functional suitability     & Compatibility              & Maintainability & Performance Efficiency & Reliability    & Security        & Portability  & Usability                  \\
+        \hline
+        Functional Correctness     & Syntactic Interoperability & Modularity      & Time Behavior          & Availability   & Authenticity    & Portability  & Accessibility              \\
+        \hline
+        Functional Completeness    & Semantic Interoperability  & Modifiability   & Resource Efficiency    & Accountability & Accountability  & Adaptability & Confidence \& Satisfaction \\
+        \hline
+        Functional Appropriateness &                            &                 & Capacity               &                & Confidentiality & Instability  & Errors                     \\
+        \hline
+                                   &                            &                 & Scalability            &                & Integrity       &              & Learnability               \\
+        \hline
+                                   &                            &                 &                        &                &                 &              & Memorability               \\
+        \hline
+                                   &                            &                 &                        &                &                 &              & Efficiency                 \\
+        \hline
+    \end{tabular}
+\end{adjustbox}
+\subsection{Which quality attributes and characteristics are suitable?}
+\begin{itemize}
+    \item Intuitive user interface (non-functional requirement)
+          \begin{itemize}
+              \item Learnability
+                    \begin{itemize}
+                        \item Ease to handle and to learn how to use the system
+                    \end{itemize}
+              \item Efficiency
+                    \begin{itemize}
+                        \item Quickness in performing tasks with the system
+                    \end{itemize}
+              \item Memorability
+                    \begin{itemize}
+                        \item Ease to use the system again after a long break
+                    \end{itemize}
+              \item Errors
+                    \begin{itemize}
+                        \item Amount of errors users make
+                    \end{itemize}
+              \item Confidence and Satisfaction
+                    \begin{itemize}
+                        \item Experience while using the system
+                    \end{itemize}
+          \end{itemize}
+    \item Usability (quality characteristic)
+    \item High resolution video stream (min. 720p) (non-functional requirement)
+          \begin{itemize}
+              \item Time behavior
+                    \begin{itemize}
+                        \item Data needs to be processed fast
+                    \end{itemize}
+              \item Resource efficiency
+                    \begin{itemize}
+                        \item To not overload the resources
+                    \end{itemize}
+              \item Capacity
+                    \begin{itemize}
+                        \item Servers need to be able to transfer the amount of video data
+                    \end{itemize}
+              \item Scalability
+                    \begin{itemize}
+                        \item Ability to handle a lot of meetings at the same time
+                    \end{itemize}
+          \end{itemize}
+    \item Performance Efficiency (quality characteristic)
+    \item Adoptions to the system within low downtimes (non-functional requirement)
+          \begin{itemize}
+              \item Modularity
+                    \begin{itemize}
+                        \item Implement functions as separated modules with low impact on other modules
+                    \end{itemize}
+              \item Modifiability
+                    \begin{itemize}
+                        \item Ease to change modules within the system
+                    \end{itemize}
+          \end{itemize}
+    \item Maintainability (quality characteristic)
+\end{itemize}
+
+\subsection{Basic Process Activities}
+In the book, we described six basic process activities that are found in all architecture design processes and life-cycle models, since these processes and models often deal with the same basic problems. Select an architecture design process or life-cycle model (e.g., Scrum, Waterfall Model, Unified Process, etc.) and analyze it with regard to the six basic process activities.
+
+\begin{itemize}
+    \item The architecture design process's primary output is an architectural description.
+    \item The basic process activities are:
+          \begin{enumerate}
+              \item Making a business case for the system
+              \item Understanding the architecturally significant requirements
+              \item Designing or selecting the architecture
+              \item Documenting \& communicating the architecture
+              \item Evaluating the architecture
+              \item Ensuring that the implementation conforms to the architecture
+          \end{enumerate}
+\end{itemize}
+Rational Unified Process model
+\begin{itemize}
+    \item Rational Unified Process model developed by IBM
+    \item Building blocks on vertical axis
+    \item Project life-cycle phases on horizontal axis
+          \begin{itemize}
+              \item Inception: Formulation of the vision and functionality
+              \item Elaboration: Detailed description of the architecture
+              \item Construction: Development and product testing
+              \item Transition: Delivery of the product
+          \end{itemize}
+\end{itemize}
+SCRUM Model
+\begin{itemize}
+    \item Sprint: Basic unit of development (iteration)
+    \item Sprint planning: Set goals of the sprint
+    \item Daily scrum: Daily meeting
+    \item Sprint review: Discussion and presentation of sprint results
+    \item Sprint retrospective: Feedback reflection on process / methods of past sprint
+\end{itemize}
+
+\subsection{Scanning networks}
+What is a (network) service?
+\begin{itemize}
+    \item Application running at the network application layer and above
+    \item Providing standardized services to devices and applications within the network
+    \item Modularized and encapsulated to ports
+    \item Can be realized through other services / network protocols
+    \item For example: The World Wide Web is a service provided on the Internet using the network protocol HTTP
+\end{itemize}
+Network Service Examples
+\begin{itemize}
+    \item DNS
+          \begin{itemize}
+              \item Domain Name System as database of domain names and corresponding IP adresses
+          \end{itemize}
+    \item DHCP
+          \begin{itemize}
+              \item Dynamic Host Configuration Protocol (enables server to send network configuration to client)
+          \end{itemize}
+    \item HTTP
+          \begin{itemize}
+              \item Hyper Text Transfer Protocol is a stateless application-level protocol for distributed, collaborative, hypertext information systems
+          \end{itemize}
+    \item VoIP: Voice over VoIP
+    \item File sharing (FTP)
+    \item Printing
+    \item e-Mail (POP3)
+\end{itemize}
+
+\section{Tutorial 3}
+\subsection{Middleware in Practice | Booking a flight ticket}
+Use case: A customer books a flight ticket on the airline's website and pays by credit card. Afterwards, an E-Mail is sent which includes the boarding. Assuming this process is handled primarily by existing legacy systems and middleware is used, what could the architecture look like? Sketch your thoughts and describe in bullet points how to process of this presumably simple transaction might be handled from a system perspective.
+\begin{itemize}
+    \item Let the airline's system be the core system
+    \item Possible interfaces:
+    \item databases
+          \begin{itemize}
+              \item for user data (transaction history, master data, etc.)
+              \item for flights (departure time, flight duration, capacity etc.)
+          \end{itemize}
+    \item Systems for external transactions
+          \begin{itemize}
+              \item for incentives (loyalty programs such as "Miles \& More")
+              \item for payment handling (e.g., Unzer/heidelpay, PayPal etc.)
+          \end{itemize}
+    \item Other systems
+          \begin{itemize}
+              \item A subsystem for sending Emails
+              \item Communication with the user through a web server
+          \end{itemize}
+    \item The communication with these systems is accomplished via middleware
+\end{itemize}
+What would change if the customer used another way to book the flight tickets (e.g., by phone or using a website for price comparison)? \\
+The system sketched before needs additional interfaces. E.g., when a flight is booked via phone, there is a system which manages these calls. This system has to connect to the core system.\\
+In case of a customer booking a flight using a website for price comparison, the buying process looks completely different (payment handling and further processes may be handled by this website).
+Apart from that, the airline's core system has to offer an interface which provides data to the price comparison website. Here, the entire system of the airline can be seen as legacy system.
+\subsection{Middleware RPC | Spotify API}
+Spotify leads the market in the field of music streaming and provides a board API support for developers. These allow individually allowed applications to connect to Spotify in order to use the services provided via RPC. to activate access to the API, one has to register at Spotify to create an account and, thereafter, activate the developer options at https://developer.spotify.com/\\
+a. On which principles does Spotify build on to allow for RPC?\\
+Spotify API uses REST
+\begin{itemize}
+    \item The basic idea of RESTful HTTP interactions is that each resource can be identified using a unique URI, usually of the following format: <protocol>://<service-name>/<ResourceType>/<ResourceID>
+    \item Client sends and HTTP request to the URI:
+          \begin{itemize}
+              \item Which operation the service performs is determined by the request's HTTP request method specified in its header (CRUD)
+              \item The request's body may contain additional parameters (e.g., username and password)
+              \item The HTTP accept header field specifies the desired resource representation in the Web service's response
+          \end{itemize}
+          b. In which format does Spotify provide the response?
+          c. How can this answer be parsed to further use the information provided?
+          JSON stands for JavaScript Object Notation. A JSON file carries information and can be seen as representation of an object. As JSON goes hand in hand with JavaScript, the latter can easily parse the file to retrieve information.
+\end{itemize}
+\subsection{XML}
+The 2018 film Red Sparrow belongs to the thriller category. The very successful film entertains the audience (minimum age 16) for two hours and 21 minutes. The film Passengers, also starring actress Jennifer Lawrence, lasts for one hour and 56 minutes. The 2016 science fiction film was directed by Morten Tyldum. \\
+a. Summarize the relevant movie data from the text above into an XML document with a meaningful schema.
+\begin{verbatim}
+    <?xml version="1.0" encoding="UTF-8"?>
+    <movie_collection>
+        <movie title ="RedSparrow">
+            <actor>
+                <firstname>Jennifer</firstname>
+                <name>Lawrence</name>
+            </actor>
+            <releaseyear>2018</releaseyear>
+            <category>Thriller</category>
+            <duration_min>141</duration_min>
+        </movie>
+        <movie title ="Passengers">
+            <actor>
+                <firstname>Jennifer</firstname>
+                <name>Lawrence</name>
+            </actor>
+            <director>
+                <firstname>Morten</firstname>
+                <lastname>Tyldum</lastname>
+            </director>
+            <releaseyear>2016</releaseyear>
+            <category>Science-Fiction</category>
+            <duration_min>116</duration_min>
+        </movie>
+    </movie_collection>
+\end{verbatim}
+b. What would the corresponding Document Object Model (DOM) look like?
+\includegraphics[width=1\textwidth]{./dom.png}
+
+\section{Tutorial 4}
+\subsection{NIST's Cloud computing Definition}
+Cloud Computing isa model which enables
+\begin{itemize}
+    \item \textbf{flexible and demand-oriented} access to
+    \item a \textbf{shared pool} of
+    \item configurable \textbf{IT resources},
+    \item which can be accessed at any time and from anywhere \textbf{via the Internet} or a network
+\end{itemize}
+\subsection{Cloud Computing Stack}
+\includegraphics[width=1\textwidth]{./cloud_computing_stack.png}
+\subsection{Exercise 1}
+Please read the paper "What Serverless Cloud Computing Is and Should become: The next Phase of Cloud Computing". Then answer and discuss the following questions:\\
+a) Explain the concepts Serverless and Serverful Cloud Computing. Which are the main differences between Serverless and Serverful Computing stated in the paper?
+\begin{itemize}
+    \item Serverful Computing
+          \begin{itemize}
+              \item Simplifies system administration by making it easier to configure and manage computing infrastructure
+              \item Use of virtual servers and networks
+              \item Can be accessed at any time
+              \item Flexible and on-demand oriented access to resources
+          \end{itemize}
+    \item Serverless Computing
+          \begin{itemize}
+              \item Hides complexity of servers
+                    \begin{itemize}
+                        \item Abstraction that hides complexity of programming and operating them
+                    \end{itemize}
+              \item Programmers use high-level abstractions offered by the cloud provider while creating applications
+                    \begin{itemize}
+                        \item For example: use of serverless object storage, message queues, key value store databases
+                        \item simplifies cloud programming
+                    \end{itemize}
+              \item Several serverless environments can run arbitrary code
+              \item Cloud provider takes care of many of the operational responsibilities needed to run applications
+              \item Serverless computing means to change the focus from servers to applications, but servers are still the invisible bedrock that powers it
+          \end{itemize}
+\end{itemize}
+Main differences\\
+\begin{adjustbox}{width=1.7\textwidth,center=\textwidth}
+    \begin{tabular}{ | c | c | c | }
+                                                                          & Serverful Computing                                                              & Serverless Computing                                                                       \\
+        \hline
+
+        Who are the primary users/adressees of the Cloud Computing model? & System administrators                                                            & Application developers                                                                     \\
+        \hline
+
+        Cost model (Total Cost of Ownership)                              & Pre-pay/contract (charged by reservation)                                        & Pay-as-you-go cost model (no charge for idle resources)                                    \\
+        \hline
+
+        Complexity for programmers while creating applications            & Complex machine details or security threats can be part of the programmers tasks & Programmers use high-level abstractions, often using the language of their choice          \\
+        \hline
+
+        What is the focus of the offered Cloud service?                   & Servers (e.g. installing and maintaining servers and storage)                    & Applications, solving problems that are unique to the domain                               \\
+        \hline
+
+        How are the resources shared?                                     & Resource pooling exists, illusion of infinite IT resources                       & Resource pooling on more fine-grained basis which is also related to the pay-per-use model \\
+        \hline
+    \end{tabular}
+\end{adjustbox}
+\subsection{Exercise 2}
+a) What are the three essential qualities of serverless computing?
+\begin{itemize}
+    \item Abstraction: Providing and abstraction that hides the servers and the complexity of programming and operating them.
+    \item Pay-as-you-go: Offering a pay-as-you-go cost model instead of a reservation-based model, so there is no charge for idle resources.
+    \item Scaling: Automatic, rapid and unlimited scaling resources up and down to match demand closely, from zero to practically infinite.
+\end{itemize}
+b) Imagine you run an online store for creative and sustainable gifts. How would the three qualities mentioned affect your use case compared to serverful computing?
+\begin{itemize}
+    \item Abstraction
+          \begin{itemize}
+              \item Small online sops usually do not have a large IT knowledge/departments
+              \item Easy to set up a new online shop for testing phase
+              \item Online shop owner could focus on core business
+          \end{itemize}
+    \item Pay-as-you-go
+          \begin{itemize}
+              \item Online shop have a lot of idle time (night, holiday season, ...)
+              \item Payment is also aligned to turnover (more transactions \(\Rightarrow\) higher costs for cloud service)
+          \end{itemize}
+    \item Scaling
+          \begin{itemize}
+              \item In contrast to idle time online shops are busy sometimes: pre-Christmas, black friday, ... \(\Rightarrow\) High degree of scalability needed!
+              \item Some of these peaks are not predictable \(\Rightarrow\) Need for rapid and unlimited scaling resources
+          \end{itemize}
+\end{itemize}
+c) Name two use cases where serverless computing does not make sense or is rather associated with disadvantages.
+\begin{itemize}
+    \item Abstraction
+          \begin{itemize}
+              \item Startup, as there are often special requirements and IT know-how is available, the abstraction would strongly limit the possibilities of customization
+          \end{itemize}
+    \item Pay-as-you-goals
+          \begin{itemize}
+              \item Private website or data storage: Accidental high usage (e.g. automatic backup of mobile devices or other out-of-control actions) may occur, resulting in unexpectedly high costs.
+          \end{itemize}
+    \item Scaling
+          \begin{itemize}
+              \item Based on or almost identical to the use case in the "pay-as-you-go" example
+          \end{itemize}
+\end{itemize}
+\subsection{Exercise 3}
+The authors of the paper predict that Serverless Computing will become the dominant form of cloud computing.
+a) Which are the named reasons for this trend? Identify the main advantages (e.g. for application developers) and explain how they lead to dominant usage of Serverless Computing.
+\begin{itemize}
+    \item Serverless Computing allows customers to stay focused on solving problems that are unique in their domain
+          \begin{itemize}
+              \item \(\Rightarrow\) More productive programmers
+          \end{itemize}
+    \item Unit prices of resources are higher, but customers only pay for resources that they are using
+          \begin{itemize}
+              \item \(\Rightarrow\) Substantial cost savings
+          \end{itemize}
+    \item Helps customer meet variable und unpredictable resource needs
+          \begin{itemize}
+              \item Already exists in Serverful Computing, but opportunity grows as resources are shared on a more fine-grained basis
+          \end{itemize}
+    \item Cloud providers can improve margins as these products are traditionally served by high-margin software products (e.g. databases)
+    \item Incentive for cloud providers to innovate
+          \begin{itemize}
+              \item Cloud provider pays for idle resources
+              \item \(\Rightarrow\) provides incentives to ensure efficient resource allocation
+          \end{itemize}
+    \item Serverless model encourages investments in efficiency at every level as
+          \begin{itemize}
+              \item Cloud provider assumes direct control over more of the application stack (incl. operating system and language runtime)
+          \end{itemize}
+\end{itemize}
+b) Which are possible challenges and how could these be overcome?
+\begin{itemize}
+    \item Cost savings could threaten cloud provider revenues, but low prices can spark consumption growth that more than offsets the reduction in unit costs
+          \begin{itemize}
+              \item Leading to revenue growth
+          \end{itemize}
+    \item Vendor-lock-in problems
+          \begin{itemize}
+              \item Cloud customers are fearing reduced bargaining power (missing standardization due to switching cost benefits for large cloud providers)
+              \item \(\Rightarrow\) Simple and standardized abstractions (e.g. introduced by smaller cloud providers, open source communities or academics) are needed
+          \end{itemize}
+    \item Concerns about serverless security
+          \begin{itemize}
+              \item Careful design could make it easier for application developers to secure their software against external attackers
+          \end{itemize}
+\end{itemize}
+\subsection{Exercise 4}
+Briefly differentiate between the community cloud and multi-cloud deployment models.\\
+Hybrid Cloud
+\begin{itemize}
+    \item The cloud infrastructure consists of a combination of two or more of the models described above (especially public and private cloud)
+    \item The individual infrastructures remain as a unit, but are connected by standardized or proprietary technologies
+    \item With this mixed from of service, a solution is to be created that best meets the specific requirements of the respective company.
+\end{itemize}
+Multi-Cloud
+\begin{itemize}
+    \item Consolidation or aggregation of cloud services from different cloud service providers
+          \begin{itemize}
+              \item Cloud service broker appears on the market, which aggregates different services from providers and enables separate access
+          \end{itemize}
+    \item Differentiation between a multi-cloud and a hybrid cloud:
+          \begin{itemize}
+              \item Hybrid cloud: usually the connection of cloud infrastructures
+              \item Multi-clouds: targeted use of only specific cloud components from another provider
+              \item For example, performing calculation and network operations in an AWS cloud, while storage is performed solely by the Azure cloud.
+          \end{itemize}
+\end{itemize}
+Public-Cloud
+\begin{itemize}
+    \item The cloud infrastructure can be used by the general public
+    \item The public cloud provides a selection of services (e.g. business processes, applications and infrastructures) on the basis of usage-based payment for everyone simultaneously (multi-client capability) via the internet.
+    \item The cloud user cannot influence (neither technically nor contractually) which other parties use the cloud provider's service.
+    \item Adaptation to specific user requirements is usually only possible to a very limited extent
+\end{itemize}
+Private-Cloud
+\begin{itemize}
+    \item The cloud infrastructure is only used by a single organization and its members
+    \item The private cloud can be owned, managed and operated by the organization, third parties or a combination therefore
+    \item The cloud infrastructure does not necessarily have to be located locally within the organization
+    \item Cloud service customers have full control over who, how and when the service can be used
+\end{itemize}
+Virtual-Private-Cloud
+\begin{itemize}
+    \item The term "Virtual Private Cloud" was introduced by Amazon Web Services (AWS), whose new product "Amazon VPC" was introduced.
+    \item The virtual private cloud model actually provides the infrastructure for a single organization, which can include multiple users (for example, business units)
+    \item Access to the cloud is realized using a Virtual Private Network (VPN)
+    \item Cloud service customer has complete control over the virtual network environment
+\end{itemize}
+Community-Cloud
+\begin{itemize}
+    \item The cloud infrastructure is used exclusively by a group of organizations that have similar requirements for the cloud service
+    \item One or more community organizations, third parties, or a combination of these parties own, manage, and operate the infrastructure
+    \item here too, the cloud infrastructure does not necessarily have to be located locally with the organization(s).
+\end{itemize}
+\subsection{Exercise 5}
+Briefly describe a use case where the use of Fog Nodes in conjunction with cloud computing makes sense. Describe two benefits that would not have occurred without the use of Fog Nodes.
+\begin{itemize}
+    \item The use case shows a manufacturing factory that exchanges and processes data internally via fog nodes, but is also connected to supplier trucks and the executive office via cloud applications.
+    \item Benefits:
+          \begin{itemize}
+              \item Lower latency (short distances for data exchange) / higher security (data remains in-house) \(\Rightarrow\) For example: robot 1 sends 3D data of an item to the fog node, fog node processes this data and creates a 3D model, robot 2 cloud use this 3D model to grasp the scanned item
+              \item Failure safety \(\Rightarrow\) In case of network problems the fabric is not completely dependant on the cloud service
+          \end{itemize}
+\end{itemize}
+\section{Tutorial 5}
+\subsection{Exercise 1}
+Explain why the use of DLT makes sense in Health IT.
+\begin{itemize}
+    \item Tamper-resistant data history: Health data cannot be modified retrospectively.
+    \item Integrity and availability: Health data accessible worldwide and changes to data are transparent
+    \item No Single Point of Failure: Server failure or unreachability of nodes do not result in breakdown of the system as a whole
+    \item No need for trusted third-parties: Sensible health data are not stored by one single instance or authority
+\end{itemize}
+Difference between the terms Blockchain and DLT\\
+\textbf{Distributed Ledger Technology (DLT)} enables the realization and operation of \textbf{distributed ledgers}, where \textbf{benign nodes}, through a \textbf{shared consensus mechanism}, agree on an (almost) immutable record of transactions in the presence of \textbf{Byzantine failures} and eventually achieve consistency.\\
+\newline
+\textbf{Blockchain} is only one possible DLT Concept. Using Blockchain, transactions will be stored in blocks and will be ordered in a chain. Each block has a reference to its predecessor.\\
+\begin{adjustbox}{width=1.5\textwidth,center=\textwidth}
+    \begin{tabular}{|c|c|c|}
+        n       & permissioned             & unpermissioned \\
+        \hline
+        Public  & \tabitem Public network
+        \tabitem Only few trusted nodes validate transactions 
+        \tabitem Anybody can join the DLT design
+                & \tabitem Public network
+        \tabitem Anybody can join the DLT design
+        \tabitem Anybody can participate in mining, and validation
+        \\
+        \hline
+        Private & \tabitem Private network
+        \tabitem Foreign parties cannot access the DLT design
+        \tabitem Only few trusted nodes validate transactions
+                &
+        \tabitem Private network
+        \tabitem Any included device is allowed to access (read, write), and validate transactions
+        \\
+        \hline
+    \end{tabular}
+\end{adjustbox}
+Differentiate between the types of DLT. Which is appropriate for your use case?
+\begin{itemize}
+    \item Public-permissioned
+    \item Everybody is able to participate in the system. Only permissioned users can shape the ledger (validation or creation of transactions).
+    \item Validation of transaction is performed by predefined instances or nodes, such as health insurance companies, government, health department, medical board, etc.
+\end{itemize}
+Notes on Proof of work
+\begin{itemize}
+    \item Difficulty of finding a nonce can be adjusted by choosing smaller/larger target value
+    \item The nonce servers are variable input to the computation of the block has so that the resulting hash value is less than a given target value
+    \item A cryptographic hash function is a one-way function (a function which is practically infeasible to invert or revert the computation of)
+    \item Needed effort for solving the arbitrary mathematical puzzle prevents anybody from gaming the system
+\end{itemize}
+What is a consensus mechanism? How is it different from Proof of Work (PoW)?
+\begin{itemize}
+    \item A \textbf{consensus mechanism} is designed to achieve an agreement on a single state of data value (e.g., the replication of stored data) among nodes of a distributed database under consideration of network failures.
+    \item Consensus mechanisms (in blockchain) provide rules for leader election, defines transactions serialization (do we use blocks, or DAGs), and a fork resolution rule.
+    \item PoW: foundation for consensus mechanism applied to most unpermissioned DLT designs.
+\end{itemize}
+What are key differences between Proof of Work and Proof of Stake?
+\begin{itemize}
+    \item Main difference is the leader election: PoW elects leader by solving PoW puzzle, PoS elects leader with a probability proportional to his stake
+    \item Another difference is the incentivization:
+          \begin{itemize}
+              \item In PoW adding blocks (valid or malicious) costs energy due to mining, this incentives valid actions in order to not waste computational effort
+              \item In PoS there is no costly mining, thus users get paid when doing valid actions, or slashed (=losing part of stake) when doing invalid/malicious actions
+          \end{itemize}
+\end{itemize}
+What is a smart contract?
+\begin{itemize}
+    \item "A smart contract is a set of promises, specified in digital form, including protocols within which the parties perform on these promises." (Szabo, 1997)
+    \item Essential characteristics of smart contracts are (Kaularzt \& Heckmann, 2016):
+          \begin{enumerate}
+              \item Digital verifiable event (receipt of a transaction)
+              \item Program code that processes the event (examination of transaction)
+              \item Legally relevant act on event's basis (issuing of goods)
+          \end{enumerate}
+\end{itemize}
+Explain how smart contracts work within the Ethereum Blockchain \newline
+\includegraphics[width=1\textwidth]{./smart_contracts.png}\\
+Demonstration of Ethereum smart contract
+\begin{enumerate}
+    \item Both parties agree on a smart contract which is actually a tiny computer program stored on a distributed ledger
+    \item Deployment on Ethereum Blockchain creates distribution and provides tamper resistance to smart contract
+    \item Contract participants can call functions on the contract by sending special transaction
+    \item If the gas limit is not exceeded, the function will be executed automatically
+    \item Perform predefined consequences of the function, e.g. send cryptocurrency Ether to recipient
+\end{enumerate}
+What possible implications does PayPal's adoption of Bitcoin hold?
+\begin{itemize}
+    \item Technological: technology will improve, standardizations, etc.
+    \item Societal: Acceptance of Bitcoin, cryptocurrencies or Blockchain will register
+    \item Regulative: new laws and regulations concerning use of cryptocurrencies
+    \item Economic: Changes in Bitcoin price
+\end{itemize}
+\section{Tutorial 6}
+\subsection{Exercise 1}
+Where can you see 9 core characteristics of the Internet of Things?
+\begin{itemize}
+    \item Interconnection of things
+          \begin{itemize}
+              \item Smartphone connected to garage door/kitchen
+          \end{itemize}
+    \item Connection of things to the Internet
+          \begin{itemize}
+              \item Devices can send notifications
+              \item Mother orders smoothies with her Smartphone
+          \end{itemize}
+    \item Uniquely identifiable things
+          \begin{itemize}
+              \item The Persons (their tags/devices) in the video get identified (e.g. when entering a room)
+          \end{itemize}
+    \item Ubiquity
+          \begin{itemize}
+              \item The technology is in every part of their life (the whole day)
+          \end{itemize}
+    \item Sensing (and actuation) capabilities
+          \begin{itemize}
+              \item Multiple sensors (toxic fumes, temperature, soil humidity, etc.)
+              \item Smart things can control other things (garage door, temperature, etc.)
+          \end{itemize}
+    \item Embedded intelligence
+          \begin{itemize}
+              \item Nearly all things are smart (fridge checks stock of groceries, rooms check their occupancy, etc.)
+          \end{itemize}
+    \item Interoperable communication capabilities
+          \begin{itemize}
+              \item Many different devices communicate with each other
+          \end{itemize}
+    \item Self-configurability
+          \begin{itemize}
+              \item The fridge sensor needs no setup, configures itself
+          \end{itemize}
+    \item Programmability
+          \begin{itemize}
+              \item Oven preheats automatically when mother enters the kitchen (programmed)
+          \end{itemize}
+\end{itemize}
+Name examples for smart devices, smart objects, and smart environments in this video. Pleas name at least three of each.
+\begin{itemize}
+    \item Smart devices
+          \begin{itemize}
+              \item Smartphones
+              \item Tablet
+              \item Smartwatches
+          \end{itemize}
+    \item smart Objects
+          \begin{itemize}
+              \item fridge
+              \item Oven
+              \item car
+          \end{itemize}
+    \item Smart environments
+          \begin{itemize}
+              \item house
+              \item Workplace
+              \item Garden
+          \end{itemize}
+\end{itemize}
+In regard to existing challenges of Internet of Things: Which challenges are relevant in the use cases of the video and why?
+\begin{itemize}
+    \item Data flood
+          \begin{itemize}
+              \item The devices and sensors create a vast amount of data
+              \item The devices need to process the data before sending it to the cloud
+          \end{itemize}
+    \item Interoperability
+          \begin{itemize}
+              \item The fridge sensor was able to communicate with the Smartphone of the body
+              \item New devices need to be able to communicate with the existing ones
+          \end{itemize}
+    \item Security and Privacy
+          \begin{itemize}
+              \item Burglars could look to see if people are at home
+              \item Collected data could be stolen and sold
+              \item No unauthorized access to the data
+          \end{itemize}
+\end{itemize}
+How could future work counteract these challenges?
+\begin{itemize}
+    \item Data flood
+          \begin{itemize}
+              \item With Implementing Edge and Fog Computing, less data needs to be sent as data gets pre-processed
+          \end{itemize}
+    \item Security and Privacy
+          \begin{itemize}
+              \item New security features (e.g., two factor authorization)
+          \end{itemize}
+    \item Interoperability
+          \begin{itemize}
+              \item A uniform protocol is necessary for interoperable communication
+              \item ZigBee-Alliance with over 230 companies for unification in IoT sector
+          \end{itemize}
+\end{itemize}
+Imagine you order your toothpaste online at Amazon and it will be delivered to your home via DHL.\\
+Do you know Internet of Things applications/processes that currently support these kind of use cases?
+\begin{itemize}
+    \item Amazon Dash Buttons
+    \item Logistic with sensors and automation
+    \item Order via Alexa
+    \item Tracking
+    \item Smart doorbells to communicate with people on your door when you are not at home
+\end{itemize}
+What could be changed or implemented to improve this use case by the Internet of Things in the near future?
+\begin{itemize}
+    \item Delivery via Drone
+    \item Virtual Mirror to support online shopping decisions
+\end{itemize}
+\subsection{Exercise 3}
+Name for CIIs that most people are in contact with in their everyday lives.
+\begin{itemize}
+    \item WhatsApp
+    \item Google
+    \item GPS/Galileo
+    \item GSM (mobile network)
+\end{itemize}
+Discuss two of the above systems regarding critical magnitude, critical breadth, and critical duration. Try to consider both sides of the argument.\\
+\begin{itemize}
+    \item WhatsApp
+          \begin{itemize}
+              \item Magnitude: What impacts and consequences of failure or malicious behavior?
+                    \begin{itemize}
+                        \item WhatsApp can real all messages that are sent, also passwords and other relevant private information
+                        \item Intruders can also read messages if encryption fails
+                        \item States can get access through confiscating the servers
+                    \end{itemize}
+              \item Breadth: Who will be impacted?
+                    \begin{itemize}
+                        \item Users of WhatsApp: 2 billion users worldwide
+                    \end{itemize}
+              \item Duration: How long lasts the impact?
+                    \begin{itemize}
+                        \item Most people can switch to other messengers or SMS
+                        \item Consequences of a data breach will probably be revealed forever
+                    \end{itemize}
+              \item The consequences of a failure of WhatsApp are sever in terms of magnitude and breadth
+                    \begin{itemize}
+                        \item Many people are affected and lots of data can be misused
+                    \end{itemize}
+              \item The consequences would not be severe in terms of duration since most people can switch to different messenger applications
+                    \begin{itemize}
+                        \item Data will be revealed for long time though
+                    \end{itemize}
+              \item But we see that many people currently don't change their messenger despite privacy concerns
+          \end{itemize}
+    \item GPS
+          \begin{itemize}
+              \item Magnitude: \textbf{What} impacts and consequences of failure or malicious behaviour?
+                    \begin{itemize}
+                        \item Many (critical systems use GPS for Tracking
+                        \item Majority of people use GPS for navigation (in their cars/smartphones)
+                        \item People can get lost, don't know how to get home
+                        \item Ships and trains relying on GPS can't navigate \(\Rightarrow\) Supply Chains get disturbed
+                    \end{itemize}
+              \item Breath: \textbf{Who} will be impacted?
+                    \begin{itemize}
+                        \item Everyone using GPS for navigation
+                        \item Supply Chains get disturbed \(\Rightarrow\) shortages will affect majority of population
+                    \end{itemize}
+              \item Duration: \textbf{How long} lasts the impact?
+                    \begin{itemize}
+                        \item Galileo is another satellite navigation system, but most systems rely on GPS and are not compatible to Galileo. Changing can take a long time
+                    \end{itemize}
+          \end{itemize}
+    \item The consequences of a failure of GPS are severe in terms of magnitude and breadth and duration
+          \begin{itemize}
+              \item The majority of people are affected, the consequences can be sever and switching to other satellite navigation systems takes a long time
+          \end{itemize}
+    \item With ongoing adaptation of Galileo in smartphones/ships/trains and other infrastructure, GPS and Galileo will provide some kind of redundance and a failure of Galileo will have less severe consequences
+\end{itemize}
+\subsection{Exercise 4}
+In the lecture, we presented ten properties of CIIs. Choose five properties and discuss each using GPS as an example.
+\begin{itemize}
+    \item Sociotechnical
+          \begin{itemize}
+              \item GPS consists of technical parts, but also has an impact on social processes. E.g. which route people will choose
+          \end{itemize}
+    \item Multifaceted
+          \begin{itemize}
+              \item GPS is used for various purposes: navigation, timing etc.
+          \end{itemize}
+    \item Inconspicuous
+          \begin{itemize}
+              \item Most GPS devices will connect completely automatic. No interaction is needed.
+          \end{itemize}
+    \item Evolving and adaptive
+          \begin{itemize}
+              \item The GPS system is constantly being further developed
+          \end{itemize}
+    \item Information disseminating
+          \begin{itemize}
+              \item GPS disseminates information about the location of a device
+          \end{itemize}
+\end{itemize}
+\subsection{Exercise 5}
+In the lecture, we also presented eleven challenges of CIIs. Choose six challenges and discuss each using Facebook as an example.
+\begin{itemize}
+    \item Social responsibility
+          \begin{itemize}
+              \item Facebook plays a big role in many peoples social life
+              \item The content presented can influence people's opinions and actions
+          \end{itemize}
+    \item Fairness
+          \begin{itemize}
+              \item Facebook can discriminate people who use it or companies who run ads on the platform
+          \end{itemize}
+    \item Privacy
+          \begin{itemize}
+              \item Facebook sold user data to Cambridge Analytica
+              \item It's not clear which data is collected and how much
+          \end{itemize}
+    \item Security
+          \begin{itemize}
+              \item Confident information can be stolen if Facebook gets hacked
+              \item E.g. payment information
+          \end{itemize}
+    \item Ripple effects
+          \begin{itemize}
+              \item Many people use the same password for multiple services \(\Rightarrow\) other services can be hacked as well
+              \item Facebook runs various other platforms that could be influenced as well if Facebook gets attacked
+          \end{itemize}
+    \item Algorithms decision-making
+          \begin{itemize}
+              \item Algorithms deciding what content to show can be biased
+              \item E.g., Facebooks algorithm tends to present content with radical opinions because they generate more interactions
+          \end{itemize}
+\end{itemize}
+\end{document}
