@@ -1,0 +1,294 @@
+\documentclass{article}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\title{AI C Tuts}
+\author{Leon Tuschla}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+\subsection{Welche Rolle hat das ARPANET bei der Entstehung des Internets gespielt?}
+Entwicklung durch das US-Verteidigungsministerium mit dem Resultat, dass eine Verbindung zwischen 4 Computern unterschiedlicher Unis hergestellt werden konnte. Austausch der Informationen in kleinen Datenpaketen \(\Rightarrow\) technische Grundlage für das Internet
+\subsection{Wie ist Internet-Computing definiert?}
+Internet-Computing befasst sich mit den im Internet bereitgestellten Anwendungen, Architekturen und Technologien, die in Anwendungen verwendet werden, und den systemischen Aspekten, die das Design solcher Anwendungen formen.
+\subsection{Was sind die Hauptmerkmale von verteilten IS?}
+\begin{itemize}
+    \item Verteiltes Speichern + Abrufen von Datenpaketen
+    \item geographisch verteilte IS
+    \item verteilte Nutzer
+\end{itemize}
+\subsection{Warum sind verteilte IS wichtig für internetbasierte Anwendungen?}
+Da das Internet eine verteilte Infrastruktur aufweist.
+\subsection{Was sind die zentralen Design-Herausforderungen von verteilten IS?}
+\Large Z I I I S U
+\begin{enumerate}
+    \item Zuverlässigkeit
+    \item Informationssicherheit
+    \item Integration
+    \item Interoperabilität
+    \item Skalierbarkeit
+    \item Usability
+\end{enumerate}
+\subsection{Was sind Beispiele für Internet-basierte Anwendungen?}
+Amazon, Dropbox, SAP ERP, Bitcoin, Facebook
+\section{Information Systems Architecture}
+\subsection{Was sind die Hauptziele der IS-Architekturanalyse?}
+Die IS-Architekturanalyse trägt dazu bei, dass ein System seine (nicht-) funktionalen Anforderungen erfüllt. Zudem ermöglichen IS-Architekturmodelle die Dokumentation der Komponenten und Beziehungen eines IS. Darüber hinaus wird die Kommunikation über strukturelle Eigenschaften und strukturelle Abhängigkeiten vereinfacht.
+\subsection{Was sind die neun Prinzipien der IS-Architektur?}
+\begin{enumerate}
+    \item Die Architektur modelliert Systemgrenzen, Inputs und Outputs
+    \item Ein IS kann auf eine Menge kleinerer Subsysteme heruntergebrochen werden.
+    \item Ein IS kann in Interaktion mit anderen Systemen betrachtet werden.
+    \item Ein IS kann über seinen gesamten Lebenszyklus betrachtet werden.
+    \item Ein IS kann über eine Schnittstelle mit anderen IS verbunden seine
+    \item Ein IS kann auf verschiedenen Abstraktionsebenen modelliert werden.
+    \item Ein IS kann entlang mehrerer Schichten betrachtet werden.
+    \item Ein IS kann durch zusammenhängende Modelle mit gegebener Semantik beschrieben werden.
+    \item Ein IS kann durch verschiedene Perspektiven beschrieben werden.
+\end{enumerate}
+\subsection{Was sind Architektursichten und warum ist es wichtig, eine Architekturanalyse aus verschiedenen Perspektiven durchzuführen?}
+Jede Sicht ist eine analytische Beschreibung des IS. Die Betrachtung verschiedener Perspektiven kompensiert die Schwächen, die einzelne Betrachtungsweisen haben, und ermöglicht es, die unterschiedlichen Bedürfnisse der Stakeholder zu berücksichtigen.
+\subsection{Wie werden Aufgaben und Arbeitslast in einer Client-Server Architektur verteilt?}
+Ein Server führt Programme aus, die die Ressourcen des Servers mit Clients teilen, während ein Client Inhalte oder Funktionen des Servers anfragt.
+\subsection{Was ist der Hauptunterschied zwischen einer Client-Server Architektur und einer Peer-to-Peer Architektur?}
+Peer-to-Peer Architekturen haben Clients mit Ressourcen (Bandbreite, Speicherplatz, etc.). Die Kapazität des Systems steigt mit der Nachfrage, da jeder neue Knoten seine Ressourcen teilen muss. Im Gegensatz dazu werden in einer Client-Server Architektur nur Anfragen aber keine Ressourcen geteilt, sodass die gegebene Anzahl Ressourcen mit einer steigenden Anzahl Clients geteilt werden muss.
+\subsection{Was ist das grundlegende Konzept hinter einer serviceorientierten Architektur?}
+Das grundlegende Ziel einer SOA ist die Erhöhung der Wiederverwendbarkeit von Geschäftsprozessen, indem diese Prozesse in individuellen, automatisierten Services gekapselt werden. Dadurch können sie von mehreren Client-Anwendungen verwendet werden.
+
+\section{Design of Good Information Systems}
+\subsection{Was sind die zwei unterschiedlichen Perspektiven auf den Architekturentwurf?}
+\begin{itemize}
+    \item process perspective 
+    \item Outcome perspective
+\end{itemize}
+\subsection{Was zeichnet eine gute IS-Architektur aus?}
+Eine gute IS-Architektur unterstützt die angestrebten Ziele und erlaubt die Implementierung erforderlicher Features und Verhaltensweisen.
+\subsection{Welche Arten von Architekturanforderungen können unterschieden werden?}
+\begin{itemize}
+    \item Funktionale Anforderungen: definieren die gewünschten Eigenschaften und Funktionen eines Systems
+    \item Nichtfunktinoale Anforderungen: beschreiben allgemeine Qualitätsmerkmale und Beschränkungen
+\end{itemize}
+\subsection{Beschreiben Sie Qualitätsmerkmale einer guten IS-Architektur}
+\Large Fu Co Ma Pe Re Sec U Po
+\begin{itemize}
+    \item Functional Suitability: Grad, zu dem das System die spezifizierten Bedürfnisse mit bereitgestellten Funktionen erfüllt.
+    \item Compatibility: Grad, zu dem ein Produkt oder System Daten mit anderen Produkten, Systemen, Komponenten etc. austauschen und vorhergesehene Funktionen erfüllen kann, wenn dieselbe Hard/Softwareumgebung geteilt wird.
+    \item Maintainability: Grad der Effektivität und Effizient, zu dem ein System gewartet werden kann.
+    \item Performance Efficiency: Zeitverhalten, Ressourceneffizienz, Kapazität, Skalierbarkeit
+    \item Reliability: Wahrscheinlichkeit, dass ein System die (nicht-)funktionalen Anforderungen über eine Zeitspanne mit gewissen Bedingungen erfüllt.
+    \item Security: Grad, zu dem ein System Informationen und Daten vor unberechtigtem Zugriff schützt.
+    \item Usability: Beschreibt das Ausmaß, zu dem spezifische Nutzer ein Produkt nutzen können, um bestimmte Ziele effektiv, effizient und zufriedenstellend in einem bestimmten Nutzungskontext zu erreichen.
+    \item Portability: Grad der Effektivität und Effizient, zu dem ein System auf eine andere Hardware, Software, \ldots übertragen werden kann.
+\end{itemize}
+\subsection{Was ist die Rolle eines Business Case während des IS-Architekturprozesses?}
+Ein Business Case rechtfertigt eine organisatorische Investition, indem er das zu lösende Gesamtproblem und den daraus resultierenden Nutzen für eine Organisation und ihre jeweiligen Stakeholder darstellt.
+\subsection{Welche Personen oder Gruppen müssen in den IS-Architekturentwurfsprozess miteinbezogen werden und weshalb?}
+\begin{itemize}
+    \item Architekten: weil sie sich mit IS-Architekturen auskennen
+    \item Stakeholder: weil ihre Interessen vertreten werden müssen
+\end{itemize}
+\subsection{Wie kann der Erfolg eines Architekturentwurfsprozesses bestimmt werden?}
+\begin{itemize}
+    \item Traditionell: Einhalten der Zeit-, Kosten- und Qualitätsanforderungen
+    \item Modern: Projektsicherheit, Kundenzufriedenheit, Anforderungserfüllung
+\end{itemize}
+\section{Internet Architectures}
+\subsection{Wie kann ein Computernetzwerk klassifiziert werden?}
+Ein Computernetzwerk ist eine Sammlung von Computern und Geräten, die verknüpft sind, um Informationen und Services zu teilen.
+\subsection{Was sind die Unterschiede zwischen dem Internet und dem WWW?}
+Das WWW ist ein Informationsraum (im Internet), in dem die Objekte von Interesse (Ressourcen) von globalen Identifikatoren (URIs) identifiziert werden. Das WWW ist also nur einer von vielen Services, die im Internet angeboten werden.
+\subsection{Ist das Internet ein privates oder ein öffentliches Netzwerk und wieso?}
+Das Internet kann als öffentliches Paket-vermittelndes Großraumnetzwerk gesehen werden, dass das TCP/IP-Protokoll nutzt, um Computer auf der ganzen Welt miteinander zu verbinden.
+\subsection{Wie unterscheiden sich Tier 1 und Tier 2 ISPs?}
+Tier 1 ISP werden von großen nationalen Telekommunikationsanbietern betrieben (z.B. Telekom) und tauschen ihre Daten direkt untereinander über Glasfaserkabel aus ("peering"). Tier 2 ISPs erwerben überregionalen Internetverkehr von Tier 1 ISPs, sind aber oft nur für regionale Kommunikation zuständig. Sie agieren als Mittelsmann zwischen den Endkunden und anderen ISPs.
+\subsection{Wie funktioniert IP-Routing?}
+Sobald die Daten in Pakete aufgeteilt wurden, werden diese über Router übertragen. Ein Router ist ein Gerät, das den besten Weg für den Versand eines Datenpakets zu seinem Ziel ermittelt. Der Router ist zu mind. 2 Netzwerken verbunden und kann Pakete somit über Netzwerkgrenzen hinweg versenden. Zudem kontrolliert der Router, ob ankommende Pakete Fehler enthalten. 
+\subsection{Wie sind Domain Names aufgebaut?}
+Ein Domänenname besteht aus mind. einem Label. Diese werden durch Punkte getrennt. Jedes Label spezifiziert eine Subdomäne. Hierarchie: Root Level, Top Level Domain (de), 2nd Level Domain (google.de), Sub Domains (mail.google.de).
+\subsection{Was sind die einzelnen Schritte des DNS-Lookup Prozesses?}
+Gibt der Klient im Browser einen Domänennamen ein, wird dies als Anfrage an den ISP Nameserver weitergeleitet. Sofern dieser den Domänennamen im Cache hat, wird die Antwort direkt zurückgegeben. 
+Andernfalls wendet sich der Nameserver an den Root Nameserver usw. bis die IP-Adresse bekannt ist und zurückgegeben werden kann. Je nach Implementierung erledigen die angefragten Server das Weiterfragen selbst oder liefern nur den zu befragenden Server an den ISP Nameserver zurück.
+\subsection{Was sind Vorteile eines CDN?}
+Ein CDN hat das Ziel, die Entfernung zwischen Nutzer und Netzwerkstandort zu verringern, indem er Inhalt auf viele verteilte surrogate server repliziert wird. Dadurch werden die Latenzzeit und das Risiko von Verbindungsunterbrechungen verringert und gleichzeitig die Übertragungsgeschwindigkeit erhöht.
+\subsection{Was sind die Funktionen der drei SDN Schichten?}
+Die Kontrollschicht ermöglicht es Anwendungen der Anwendungsschicht, die Verarbeitung des Datenverkehrs in der Infrastruktur dynamisch zu steuern. Dafür sendet die Kontrollschicht Konfigurations- und Routinginformationen an die Infrastrukturschicht, welche im Gegenzug operationale Daten nach oben weitergibt.
+\subsection{Wie funktioniert ein Overlay-Netzwerk?}
+Ein Overlay-Netzwerk nutzt Software, um eine abstrakte Netzwerkschicht über dem physikalischen Netzwerk zu konstruieren. Auf dieser abstrakten Schicht können Overlay Nodes definiert werden, die über virtuelle Verbindungen verbunden sind.
+\section{Middleware}
+\subsection{Was bedeutet Standorttransparenz im Kontext von RPCs?}
+Dass Anrufprozeduren weitgehend gleich sind, ob sie lokal oder entfernt sind, aber normalerweise sind sie nicht identisch, sodass lokale Anrufe von entfernten Anrufen unterschieden werden können.
+\subsection{Erklären Sie Schritt für Schritt, was passiert, wenn ein Client einen Remote-Prozeduraufruf aufruft}
+\begin{enumerate}
+    \item Der Client stub wird über einen regulären Prozeduraufruf aufgerufen.
+    \item Marshalling der Argumente durch den Client Stub und Senden der Request Message an den Server.
+    \item Server Stub erhält Request Message und führt Un-Marshalling der Argumente durch.
+    \item Server Stub ruft Server Prozedur auf.
+    \item Server Stub führt Marshalling der Ergebnisse durch und sendet Antwortnachricht an den Client.
+\end{enumerate}
+\subsection{Wie unterscheiden sich die bestehenden Middleware Kategorien voneinander?}
+\begin{itemize}
+    \item MOM: Jede Middleware-Infrastruktur, die Nachrichtenfähigkeiten anbietet.
+    \item TOM: Unterstützt die Ausführung elektronischer Transaktionen in einem verteilten Umfeld
+    \item OOM: bietet objektorientierte Prinzipien für die Entwicklung verteilter Systeme
+\end{itemize}
+\subsection{Was sind die Komponenten eines TP-Monitors?}
+Ein TP-Monitor besteht aus einem Transaction Management, TP Services und weiteren Komponenten (Interface, Program Flow, Registered Programs, Communication Manager, Router, Resources)
+\subsection{Was ist der Unterschied zwischen einem lokalen und einem entfernten Prozeduraufruf?}
+Ein lokaler Prozeduraufruf ist auf den eigenen Adressbereich beschränkt, entfernte Prozeduraufrufe ermöglichen es dagegen, eine Prozedur in einem entfernten Prozess oder in einer entfernten Maschine aufzurufen.
+\subsection{Warum brauchen wir Middleware, wenn verschiedene Softwarekomponenten bereits APIs anbieten?}
+Middleware erleichtert die Wartung des Clients, da dieser lediglich mit der Middleware-API anstatt mit den unterschiedlichen APIs der Softwarekomponenten kommunizieren muss.
+\subsection{Was sind die gängigsten kommerziellen Implementierungen von Middleware?}
+CORBA, COM, Windows Communication foundation
+\subsection{Was ist der Unterschied zwischen einem Webservice und Middleware?}
+Web-Services können als spezielle Art von Middleware Systemen gesehen werden, da sie das Konzept von Middleware in Bezug auf organisationsübergreifenden Datenaustausch erweitern.
+
+\section{Web Services}
+\subsection{Was ist ein Web Service?}
+Web Services sind in sich geschlossene, modulare, verteilte, dynamische Anwendungen, die beschrieben, veröffentlicht, lokalisiert und über das Netzwerk aufgerufen werden können, um Produkte, Prozesse und Lieferketten zu erstellen. Diese Anwendungen können lokal, verteilt oder Web-basiert sein.
+\subsection{Was sind die Designprinzipien hinter HTTP?}
+HTTPS ist ein zustandsloses Protokoll auf Anwendungsebene für verteilte, kollaborative und hypertextbasierte Informationssyteme. HTTP unterstützt Caching von Anfragen und ermöglicht so den Aufbau skalierender Web Services.
+\subsection{Was ist der Unterschied zwischen einem gültigen und einem wohlgeformten XML Dokument?}
+Ein XML-Dokument ist wohlgeformt, wenn es nur Unicode-Text beinhaltet, ein einziges Wurzelelement hat, jeder Tag geöffnet und geschlossen wird, es richtig verschachtelt ist und wenn es keine Duplikate enthält. Ein gültiges XML-Dokument muss darüber hinaus zusätzliche, vom Nutzer definierte Regeln erfüllen.
+\subsection{Was ist XSD und warum wird es benötigt?}
+Eine XML Schema Definition (XSD) zielt darauf ab, eine Klasse von XML-Dokumenten mithilfe von Schema Komponenten zu definieren und zu beschreiben, um die Bedeutung, Nutzung und Beziehungen deren konstitutioneller Teile zu beschränken und zu dokumentieren.
+\subsection{Was ist SOAP und welche Funktionalitäten bietet es?}
+SOAP Web Services erlaubt den protokollunabhängigen Transport von Nachrichten und bietet eine hohe Sicherheit, einen standardisierten Ansatz und erweiterbare Funktionalität.
+\subsection{Was ist der Zweck eines WSDL-Dokuments}
+Dank WSDL muss der Client lediglich wissen, welche Nachrichten gesendet und welche Antworten erwartet werden können. Der Client muss also keinerlei Wissen über die tatsächliche Implementierung des Web Services haben.
+\subsection{Erklären Sie, wie XSD im Kontext von SOAP-basierten Web Services und WSDL verwendet werden kann.}
+XSD ermöglicht die Standardisierung des Formats der XML-Dokumente, aus denen SOAP und WSDL bestehen.
+\subsection{Was sind RESTful Web Services und wie unterscheiden sie sich von SOAP Web Services?}
+RESTful Web Services folgen dem Client-Server Architekturmuster und sind zustandslos.
+SOAP macht dagegen keine Annahme über den Zustand der Services.
+RESTful Web Services sind datengetrieben, SOAP eher funktionsgetrieben.
+\section{Cloud, Fog and Edge Computing}
+\subsection{Was sind die Hauptmerkmale von Cloud Services?}
+\begin{itemize}
+    \item Service-basierte IT-Ressourcen
+    \item On-demand self-service
+    \item Ubiquitous Access
+    \item Multitenancy
+    \item Location Independence
+    \item Rapid Elasticity
+    \item Pay-per-Use Billing
+\end{itemize}
+\subsection{Wie unterscheidet sich PaaS von IaaS?}
+PaaS stellt eine Cloud-Umgebung bereit, in der die Nutzer Anwendungen entwickeln, managen und ausliefern können, ohne sich um die Infrastruktur kümmern zu müssen.
+SaaS stellt dagegen Cloud-basierte Software bereit, d.h. es sind keine Installationen oder Updates nötig.
+\subsection{Was sind die Hauptgründe für Unternehmen, in die Cloud zu wechseln?}
+Niedrige Einstiegshürden, Pay-as-you-go, Zugriff auf führende Ressourcen und Fähigkeiten, Qualitätsverbesserungen, Kostenersparnisse, Fokus auf Kerntätigkeiten, Flexibilität, Zeitersparnisse, niedrige IT-Barrieren für Innovationen.
+\subsection{Welche Risiken, mit denen Cloud-Service Kunden konfrontiert sind, wurden von Cloud Anbietern adressiert?}
+\begin{itemize}
+    \item Kontrollverlust
+    \item Vendor Lock-in
+    \item Location Intransparency
+    \item Sicherheitsrisiken: Anbieter nutzen Zertifikation-Prozesse
+\end{itemize}
+\subsection{Was sind die wichtigsten Merkmale von Fog \& Edge Computing?}
+\begin{enumerate}
+    \item Contextual location awareness und low latency
+    \item Geographical distribution
+    \item Autonomy \& Heterogenity
+    \item Interoperability \& Federation
+    \item Real-time interactions
+    \item Scalability \& Agility of Federated Fog Clusters
+\end{enumerate}
+\subsection{Was ist die Rolle eines Fog Nodes in der Fog Computing-Umgebung?}
+Fog Nodes sind physikalische oder virtuelle Komponenten, die eng mit smarten Endgeräten oder Access Networks verbunden sind und diesen Geräten Ressourcen bereitstellen.
+Fog Nodes kennen die geographische Verteilung und logische Lokation und ermöglichen die Kommunikation zwischen Edge Layer und Fog Computing Service.
+\subsection{Warum ist Fog Computing eine Ergänzung für das traditionelle Cloud-Computing Model?}
+Fog und Edge Computing eröffnen neue Möglichkeiten für die Nutzung von Endgeräten und Computing Services, da sie eine geringe Latenzzeit haben, skalierbar sind, sich ihres Standorts bewusste sind und eine dichte geografische Verteilung aufweisen.
+\subsection{Was sind die Unterschiede zwischen Edge Computing und Fog Computing?}
+Edge Computing fokussiert sich mehr auf die Seite der ``Dinge'', während Fog Computing den Fokus auf die Infrastruktur legt.
+\subsection{Was sind die Herausforderungen von Fog- und Edge Computing?}
+\begin{itemize}
+    \item Security: Fog Nodes sind durch die verteilte Struktur angreifbar
+    \item Heterogenity: verschiedene Fähigkeiten, Domänen, Endgeräten
+    \item Programming Platform: Forderung nach einheitlichen Frameworks Energy Management: hoher Energieverbrauch
+\end{itemize}
+\section{Distributed Ledger Technology}
+\subsection{Was sind die wichtigsten Eigenschaften von verteilten Registern (distributed ledgers)?}
+Community, Flexibility, Law \& Regulation, Transparency, Performance, Security, Usability
+\subsection{Was sind die Vor- und Nachteile von Registern im Vergleich zu häufig verwendeten Architekturen?}
+Ein verteiltes Register ist eine Datenbank, die von böswilligen Knoten ausgeht. Ein verteiltes Register verkörpert mehrere Replikationen eines Registers, in denen Daten lediglich gelesen oder angehängt werden dürfen. Dadurch lassen sich Transaktionen nicht ändern und beliebig lange zurückverfolgen, wodurch eine hohe Sicherheit gewährleistet ist.
+\subsection{Was sind Hash-Funktionen und warum sind sie wichtig für DLT?}
+Eine Hashfunktion ist eine injektive, deterministische, gleichverteilte Funktion, die Datenblöcke beliebiger Größe Datenblöcken fester Größe zuordnet. H = hash(d) \(\Rightarrow\) Rekonstruktion von d ist extrem schwer.
+\subsection{Welche Konsensmechanismen kennen Sie und wie funktionieren sie?}
+Proof of Work: Jeder Knoten muss eine schwierige Aufgabe lösen, bevor die neue Transaktion in das Register eingetragen wird.
+
+Proof of Stake: Der Ersteller des nächsten Blocks wird über Kombination aus Zufall und Reichtum bzw. Anteilsalter ausgewählt.
+
+Practical Byzantine Fault Tolerance: Ein primärer Knoten sendet die Anfrage an die Backup-Knoten. Der primäre Knoten wartet auf f+1 Replies \(\Rightarrow\) kann mit f Ausfällen bei 3f+1 Knoten umgehen.
+\subsection{Was sind mögliche Anwendungen auf DLT?}
+FinTech, Public Sector, Manufacturing, Mobility Sector, Energy Sector, Logistics Industry, Health Service (digitale Patientenakte), Musik Industry (Urheber- und Leistungsschutzrechte)
+\section{Internet of Things}
+\subsection{Was ist das Internet der Dinge und was sind seine neun wesentlichen Merkmale?}
+Das Internet der Dinge ist ein selbst-konfigurierendes, adaptives und komplexes Netzwerk, das Dinge mit einer physischen und virtuellen Repräsentation über das Internet verbindet, basierend auf standardisierten Kommunikationsprotokollen.
+\begin{enumerate}
+    \item Interconnection of Things
+    \item Connection of things to the Internet
+    \item Uniquely identifiable Things
+    \item Ubiquity
+    \item Sensing and actuation capabilities
+    \item Embedded intelligence
+    \item Interoperable
+    \item Self-configurability
+    \item Programmability
+\end{enumerate}
+\subsection{Was sind gängige Architekturen für das Internet der Dinge und wie beschreiben sie das Internet der Dinge?}
+\begin{itemize}
+    \item 3-Layer-Model
+    \begin{itemize}
+        \item Application Layer
+        \item Network Layer
+        \item Perception Layer
+    \end{itemize}
+    \item 5-Layer-Model
+    \begin{itemize}
+        \item Business Layer
+        \item Application Layer
+        \item Processing Layer
+        \item Transport Layer
+        \item Perception Layer
+    \end{itemize}
+    \item Iot-A
+\end{itemize}
+\subsection{Was sind die vier Grundlagentechnologien für das Internet der Dinge und wie ermöglichen sie das Internet der Dinge?}
+\begin{itemize}
+    \item Tagging Technologies: erlauben das Zählen und Tracken jedes Objekts
+    \item Sensor Technologies: sammeln Daten über die reale Welt und vervollständigen somit menschliche Sinne. Viele verknüpfte Sensoren machen den Wert dre Technologie aus. 
+    \item Smart Technologies Intelligenz
+    \item Miniaturization Technologies: Größe
+\end{itemize}
+\subsection{Was sind die drei Kernkonzepte des Internets der Dinge?}
+\begin{itemize}
+    \item Smart Devices 
+    \item Smart Objects
+    \item Smart Environment
+\end{itemize}
+\subsection{Was sind typische Anwendungsbereiche des Internets der Dinge?}
+\begin{itemize}
+    \item Smart Homes
+    \item Smart communities
+    \item Industrial Internet of Things
+    \item Energiesektor
+    \item Gesundheitswesen
+\end{itemize}
+\subsection{Was sind zentrale Herausforderungen für das Internet der Dinge?}
+\begin{itemize}
+    \item Data Flood: riesige Datenmengen müssen in Form konstant kleiner Datenmengen übermittelt, verarbeitet und gespeichert werden
+    \item Interoperabilität: Trend zur Plattformisierung + verschiedenen Ökosystemen
+    \item Sicherheit und Privatsphäre
+\end{itemize}
+
+\section{Critical Information Infrastructures}
+\subsection{Was sind kritische Informationsinfrastrukturen?}
+Eine kritische Informationsinfrastruktur ist ein Informationssystem, dessen Störung oder unerwünschte Reaktion schädliche Auswirkungen auf lebenswichtige gesellschaftliche Funktionen oder auf Gesundheit, Sicherheit und das ökonomische + soziale Wohlbefinden der Menschen haben können.
+\subsection{Wer sollte für den Betrieb kritischer Informationsinfrastrukturen zuständig sein?}
+Der Betreiber sollte nicht nur technische, sondern auch ethische, rechtliche und soziale Herausforderungen bewältigen können.
+\end{document}
